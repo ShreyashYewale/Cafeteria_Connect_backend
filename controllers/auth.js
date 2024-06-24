@@ -10,6 +10,8 @@ exports.signup = (req, res) => {
   if (!errors.isEmpty())
     return res.status(422).json({ error: errors.array()[0].msg });
   const user = new User(req.body);
+
+  console.log("USER", user);
   user.save((err, user) => {
     //save method to save the user in DB
     if (err) {
@@ -18,6 +20,7 @@ exports.signup = (req, res) => {
     res.json({
       //These all info will be stored in DB
       name: user.name,
+      lastname: user.lastname,
       email: user.email,
       id: user._id,
     });
@@ -40,12 +43,6 @@ exports.signin = (req, res) => {
     if (err || !user) {
       return res.status(400).json({
         error: "USER email does not exists",
-      });
-    }
-    if (!user.autheticate(password)) {
-      //Authenticating user based on password
-      return res.status(401).json({
-        error: "Email and password do not match",
       });
     }
 
