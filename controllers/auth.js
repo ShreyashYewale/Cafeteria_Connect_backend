@@ -17,13 +17,7 @@ exports.signup = (req, res) => {
     if (err) {
       return res.status(400).json({ err: "NOT able to save user in DB" });
     }
-    res.json({
-      //These all info will be stored in DB
-      name: user.name,
-      lastname: user.lastname,
-      email: user.email,
-      id: user._id,
-    });
+    res.json(user);
   });
 };
 
@@ -43,6 +37,12 @@ exports.signin = (req, res) => {
     if (err || !user) {
       return res.status(400).json({
         error: "USER email does not exists",
+      });
+    }
+
+    if (password !== user.password) {
+      return res.status(401).json({
+        error: "Incorrect Password",
       });
     }
 
