@@ -27,7 +27,7 @@ var userSchema = new mongoose.Schema(
     salt: String,
     role: {
       type: String,
-      default: "Employee",
+      default: 0,    // it is 0 for Employee and 1 for Vendor
     },
   },
   { timestamps: true }

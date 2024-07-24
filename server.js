@@ -33,6 +33,7 @@ app.use(cors());
 //Routes
 app.use('/api', authRoutes);
 
+
 //PORT
 const port = process.env.PORT || 8000;
 

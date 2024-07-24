@@ -65,3 +65,10 @@ exports.signout = (req, res) => {
     message: "User Signout Successfully",
   });
 };
+
+exports.isVendor=(req,res,next)=>{
+  if(req.profile.role==0){
+    return res.status(403).json({error:"You are not Vendor"});
+  }
+  next();
+}
